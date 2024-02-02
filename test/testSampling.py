@@ -7,19 +7,17 @@ from ddt import ddt, data, unpack
 import sampling as targetCode
 
 @ddt
-class TestCreatePointingPomdpSpace(unittest.TestCase):
-        
-    @data(([1, 2, 3], [(1, 2), (3, 4)], [2, 4], ([(2, 1), (4, 1), (2, 2), (4, 2), (2, 3), (4, 3)], [(1, 2), (3, 4), 'Silence'], [1, 2, 3])))
+class TestSampling(unittest.TestCase):
+
+    @data((np.array([.8,.2]), 10000,
+           [2000-2.81*math.sqrt((.9*.1)*10000), 2000+2.81*math.sqrt((.9*.1)*10000)]))
     @unpack
-    def testCreatePointingPomdpSpace(self, stateSpace,  utteranceSpace, goalSpace, expectedResult):
-        calculatedResult=targetCode.createPointingPomdpSpace(stateSpace, utteranceSpace, goalSpace)
-        self.assertListEqual(calculatedResult[0], expectedResult[0])
-        self.assertListEqual(calculatedResult[1], expectedResult[1])
-        self.assertListEqual(calculatedResult[2], expectedResult[2])
-        
+    def test_sample_initial(self, init_dist, size, expectedResult):
+        calculatedResult = sum([sample_initial(init_dist) for i in range(size)])
+        self.assertTrue(expectedResult[0] <= calculatedResult and calculatedResult <= expectedResult[1])
     def tearDown(self):
         pass
 
 
 if __name__ == '__main__':
-	unittest.main(verbosity=2)
+    unittest.main(verbosity=2)
