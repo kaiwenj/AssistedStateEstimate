@@ -1,9 +1,15 @@
 # Sample from belief
 
-def sample_initial(init_dist):
+def sampleDistribution(inititialDistribution):
     # Input: 1-D array that represents probability distribution
     # Output: Random index sampled using the probability distribution
-    return np.random.choice(np.arange(0, init_dist.size), p=init_dist)
+    return np.random.choice(np.arange(0, inititialDistribution.size), p=inititialDistribution)
+
+
+def sampleConditional(distribution, condition):  # (observation, state)
+    # Input: 1-D array that represents probability distribution
+    # Output: Random index sampled using the probability distribution
+    return sampleDistribution(distribution[condition])
 
 # Sample from observation
 
