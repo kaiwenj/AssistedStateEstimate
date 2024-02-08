@@ -1,13 +1,13 @@
 import numpy as np
 
 
-def gen_init_dist(labels):
-    label_prop=np.bincount(labels,minlength=10)/len(labels)
+def genInitDist(labels,minlength=10):
+    label_prop=np.bincount(labels,minlength=minlength)/len(labels)
     init_dist=np.array(label_prop)
     return init_dist
 
-def gen_dyn_dist():
-    return np.array([np.identity(10)]*11)
+def genDyndDist(labels=10,actions=11):
+    return np.array([np.identity(labels)]*actions)
 
 
 
