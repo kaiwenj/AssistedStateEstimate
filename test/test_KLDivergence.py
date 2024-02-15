@@ -5,8 +5,18 @@ from ddt import ddt, data, unpack
 
 @ddt
 class TestKLDivergence(unittest.TestCase):
+    @data((np.array([.8, .05,.15]), np.array([.8, .05,.15]), 0),
+          (np.array([.3, .0, .7]), np.array([.7, .2, .1]), 1.10793E+00),
+          (np.array([.3, .2, .5]), np.array([.0, .2, .8]), 3.54846E+00),
+          (np.array([.8, .2, .0]), np.array([.0, .6, .4]), 1.06541E+01))
+    @unpack
+    def test_KLDiv(self, trueDist, condDist, expectedResult):
+        calculatedResult = calculateKLDivergence(trueDist, condDist)
+        print(calculatedResult)
+        self.assertAlmostEqual(expectedResult, calculatedResult, places = 3)
+
     @data((np.array([.8, .2]), np.array([[.5, .5],[.3, .7],[.2, .8],[.8, .2],[.75, .25]]), range(5),3),
-          (np.array([0.07756876, 0.06144809, 0.27270788, 0.39929912, 0.18897616]),
+          (np.array([0.07756875, 0.06144810, 0.27270786, 0.39929914, 0.18897616]),
            np.array([[0.08074545, 0.39513818, 0.00243568, 0.12340891, 0.39827177],
                      [0.20359456, 0.17993053, 0.17661841, 0.23769238, 0.20216412],
                      [0.29404398, 0.2590098 , 0.24255292, 0.1482787 , 0.0561146 ],
@@ -22,12 +32,10 @@ class TestKLDivergence(unittest.TestCase):
     @unpack
     def test_KLDiv_obs(self, trueDist, condDist, obsSpace, expectedResult):
         calculatedResult = sythesizeObs(trueDist, condDist, obsSpace)
-        print("Generated Obs: ", calculatedResult)
         self.assertTrue(expectedResult == calculatedResult)
 
     def tearDown(self):
         pass
-
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
