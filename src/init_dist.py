@@ -10,7 +10,7 @@ def generateDynamicDistribution(labels=10,actions=11):
     return np.array([np.identity(labels)]*actions)
 
 
-def generateObservationProbability(current_img,patterns,dataset):
+def generateObservationProb(current_img,patterns,dataset):
     img,label=current_img
     t_img,t_label=dataset
     subImg=t_img[np.where(t_label == label)]
@@ -30,7 +30,7 @@ def generateDynamicDistributionImg(current_img,next_img):
     else:
         return 0
 
-def generateObservationProbabilityImg(patterns,current_img):
+def generateObservationProbImg(patterns,current_img):
     img_size=current_img.shape[0]
     return len(patterns)/img_size
 
