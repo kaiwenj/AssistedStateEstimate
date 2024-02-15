@@ -9,7 +9,10 @@ def calculateKLDivergence(p, q):
     return np.sum(pShift * np.log(pShift / qShift))
 
 # Give observation that minimizes KL Divergence
-def sythesizeObs(trueDist, condDist, obsSpace): #here the indez of dist. conditions the dist for given 0
-    # Before, the dist was conditioned
-    klDivGivenObs = np.array([calculateKLDivergence(trueDist,condDist[o]) for o in obsSpace])
+def sythesizeObs(machineBelief, agentBeliefGivenObs, obsSpace):
+    # machineBelief: Machine's belief distribution after observing the true state
+    # agentBeliefGivenObs: Agent's belief distribution conditioned on machine given observation
+    # Return: Machine returns observation that changes agent's belief to most closely match the machine's belief
+    klDivGivenObs = np.array([calculateKLDivergence(machineBelief,agentBeliefGivenObs[o]) for o in obsSpace])
     return np.argmin(klDivGivenObs)
+
