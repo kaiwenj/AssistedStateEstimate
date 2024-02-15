@@ -22,4 +22,16 @@ def genObsProb(dat,patterns,dataset):
     return count/numImg
 
 
+def genInitDistImg(s_img):
+    img_len=len(s_img)
+    img_prop=np.ones(img_len)/img_len
+    return img_prop
+
+def genDynDistImg(s_img,actions=11):
+    img_len = len(s_img)
+    return np.array([np.identity(img_len)]*actions)
+
+def genObsProbImg(patterns,img_size=28):
+    return len(patterns)/img_size
+
 
