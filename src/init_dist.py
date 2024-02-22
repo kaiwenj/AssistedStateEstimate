@@ -25,7 +25,7 @@ def generateInitialDistributionImg(sample_img):
     return img_proportion
 
 def generateDynamicDistributionImg(current_img,next_img):
-    return int((np.array_equal(current_img,next_img)))
+    return np.sum((np.array_equal(current_img,next_img)))
 
 def generateObservationProbImg(patterns,current_img):
     img_size=current_img.shape[0]
