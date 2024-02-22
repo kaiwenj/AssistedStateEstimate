@@ -10,13 +10,3 @@ def genObservationProbAll(patterns,rowIndex,dataset):
     return prob
 
 
-np.where(np.array([1,2,3])==1)
-np.array([[[1,2,1],
-             [2,2,2],
-             [7,9,3]],
-            [[1,2,1],
-            [4,4,4],
-            [7,9,3]],
-            [[7,7,7],
-             [2,2,2],
-             [7,9,3]]])[np.where(np.array([1,2,3])==1)]
