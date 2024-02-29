@@ -28,6 +28,6 @@ def generateDynamicDistributionImg(current_img,next_img):
 
 def generateObservationProbImg(patterns,current_img):
     img_size=current_img.shape
-    patrn = np.isnan(patterns)
+    patrn = np.invert(np.isnan(patterns))
     return np.sum(patrn)/(img_size[0]*img_size[1])
 
