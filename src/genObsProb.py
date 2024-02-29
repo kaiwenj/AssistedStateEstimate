@@ -9,3 +9,14 @@ def genObservationProbAll(patterns,dataset,state):
     count = sum([1 for j in range(numImg) if np.array_equal(subImg[j,:,:][index], patrn)])
     prob=count/numImg
     return prob
+
+
+def genObservationProbAll(pattern, dataset, state):
+    images, labels = dataset
+    imagesFromState = images[np.where(labels == state)]
+    numberOfImagesFromState = len(imagesFromState)
+    count = sum(np.all(np.all((pattern == images) | (np.isnan(pattern)), axis=2), axis = 1)))
+    prob=count/numImg
+    return prob
+
+
