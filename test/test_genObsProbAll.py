@@ -10,19 +10,26 @@ a=(np.array([[[1,2,1],
             [7,9,3]],
             [[7,7,7],
              [2,2,2],
-             [7,9,3]]]),np.array([1,2,3]))
+             [7,9,3]]],dtype=np.float32),np.array([1,1,2]))
 
+b=np.full((3,3), np.nan)
+b[0,:]=np.array([1,2,1],dtype=np.float32)
+
+c=np.array([[1,2,1],
+             [2,2,2],
+             [7,9,3]],dtype=np.float32)
+c[2,:]=np.nan
 
 @ddt
 class TestPomdpObservationFunction(unittest.TestCase):
 
-    @data((np.array([[1,2,1]]),np.array([0]),
-           a,np.array([1.,1.,0.])))
+    @data((b,a,1,1),
+          (c,a,1,1/2))
     @unpack
-    def testPomdpObservationFunctionTrue(self,patterns,rowIndex,dataset,expectedResult):
-        calculatedResult = genObservationProbAll(patterns,rowIndex,dataset)
+    def testPomdpObservationFunctionTrue(self,patterns,dataset,state,expectedResult):
+        calculatedResult = genObservationProbAll(patterns,dataset,state)
         print(calculatedResult)
-        np.array_equal(calculatedResult, expectedResult)
+        self.assertAlmostEqual(calculatedResult, expectedResult)
 
     def tearDown(self):
         pass
@@ -30,6 +37,11 @@ class TestPomdpObservationFunction(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
+
+
+
+
+
 
 
 
