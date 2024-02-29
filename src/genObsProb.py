@@ -1,12 +1,11 @@
-def genObservationProbAll(patterns,rowIndex,dataset):
-    t_img, states = dataset
-    len_state=len(states)
-    prob=np.empty(len_state)
-    for i in range(len_state):
-        subImg = t_img[np.where(states == states[i])]
-        numImg = len(subImg)
-        count = sum([1 for j in range(numImg) if np.array_equal(subImg[j, rowIndex, :], patterns)])
-        prob[i]=count/numImg
+import numpy as np
+
+def genObservationProbAll(patterns,dataset,state):
+    t_img, t_label = dataset
+    index = np.invert(np.isnan(patterns))
+    patrn = patterns[index]
+    subImg = t_img[np.where(t_label == state)]
+    numImg = len(subImg)
+    count = sum([1 for j in range(numImg) if np.array_equal(subImg[j,:,:][index], patrn)])
+    prob=count/numImg
     return prob
-
-
