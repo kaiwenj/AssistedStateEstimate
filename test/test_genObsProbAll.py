@@ -23,6 +23,10 @@ c[2,:]=np.nan
 @ddt
 class TestPomdpObservationFunction(unittest.TestCase):
 
+    def setUp(self):
+        self.b=np.full((3,3), np.nan)
+        self.b[0,:]=np.array([1,2,1],dtype=np.float32)
+
     @data((b,a,1,1),
           (c,a,1,1/2))
     @unpack
