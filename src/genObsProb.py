@@ -15,7 +15,7 @@ def genObservationProbAll(pattern, dataset, state):
     images, labels = dataset
     imagesFromState = images[np.where(labels == state)]
     numberOfImagesFromState = len(imagesFromState)
-    count = sum(np.all(np.all((pattern == images) | (np.isnan(pattern)), axis=2), axis = 1)))
+    count = sum(np.all(np.all((pattern == imagesFromState) | (np.isnan(pattern)), axis=2), axis = 1)))
     prob=count/numberOfImagesFromState
     return prob
 
