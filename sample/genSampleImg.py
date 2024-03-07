@@ -1,5 +1,3 @@
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
 import keras
 from keras.datasets import mnist
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
