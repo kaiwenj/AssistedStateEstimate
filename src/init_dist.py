@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def generateInitialDistribution(labels,minlength=10):
-    label_proportion_img=np.bincount(labels,minlength=minlength)/len(labels)
+def generateInitialDistribution(labels):
+    label_proportion_img=np.bincount(labels)/len(labels)
     init_dist=np.array(label_proportion_img)
     return init_dist
 
