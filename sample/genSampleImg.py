@@ -26,7 +26,7 @@ def genSampleImg(images,labels,randomize=True):
             Y_lab[i*28+j]=labels[i]
     return(X_img,Y_lab)
 
-sample=np.random.choice(np.arange(X_train.shape[0]),1000)
+sample=np.random.choice(np.arange(X_train.shape[0]),100)
 R1=genSampleImg(X_train[sample],Y_train[sample])
 R2=genSampleImg(X_train[sample],Y_train[sample],randomize=False)
 
